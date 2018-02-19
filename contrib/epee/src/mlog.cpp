@@ -135,7 +135,7 @@ void mlog_configure(const std::string &filename_base, bool console)
     rename(name, rname.c_str());
   });
   mlog_set_common_prefix();
-  const char *monero_log = getenv("GRAFT_LOGS");
+  const char *monero_log = getenv("CRYPTOMY_LOGS");
   if (!monero_log)
   {
     monero_log = get_default_categories(0);

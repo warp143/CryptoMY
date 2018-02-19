@@ -56,7 +56,7 @@
 #include "supernode/FSN_Servant.h"
 #include "supernode/TxPool.h"
 #include "supernode/WalletProxy.h"
-#include "supernode/graft_wallet.h"
+#include "supernode/cryptomy_wallet.h"
 #include "supernode/api/pending_transaction.h"
 
 #include "wallet/wallet2_api.h"
@@ -69,11 +69,11 @@ using namespace Monero;
 struct TxPoolTest : public testing::Test
 {
 
-    GraftWallet * wallet = nullptr;
+    CryptoMyWallet * wallet = nullptr;
 
     TxPoolTest()
     {
-        wallet = new GraftWallet(true, false);
+        wallet = new CryptoMyWallet(true, false);
         string wallet_root_path = epee::string_tools::get_current_module_folder() + "/../data/supernode/test_wallets";
         string wallet_path = wallet_root_path + "/miner_wallet";
         wallet->load(wallet_path, "");
@@ -100,8 +100,8 @@ TEST_F(TxPoolTest, GetTx)
     ASSERT_TRUE(wallet != nullptr);
     ASSERT_TRUE(wallet->init(DAEMON_ADDR));
     wallet->refresh();
-    GraftTxExtra tx_extra;
-    uint64_t AMOUNT = 10000000000000; // 10 GRF
+    CryptoMyTxExtra tx_extra;
+    uint64_t AMOUNT = 10000000000000; // 10 CMY
 
     tx_extra.BlockNum = 123;
     tx_extra.PaymentID = "Hello";
@@ -138,8 +138,8 @@ TEST_F(TxPoolTest, GetTx)
 
     ASSERT_EQ(hash, tx.hash);
 
-    GraftTxExtra out_extra;
-    ASSERT_TRUE(cryptonote::get_graft_tx_extra_from_extra(tx, out_extra));
+    CryptoMyTxExtra out_extra;
+    ASSERT_TRUE(cryptonote::get_cryptomy_tx_extra_from_extra(tx, out_extra));
     delete ptx;
 
     ASSERT_EQ(tx_extra, out_extra);

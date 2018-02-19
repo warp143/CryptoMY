@@ -43,28 +43,28 @@ using namespace std;
 namespace Monero {
 
 
-GraftPendingTransactionImpl::GraftPendingTransactionImpl(tools::GraftWallet *graft_wallet)
-    : mWallet(graft_wallet)
+CryptoMyPendingTransactionImpl::CryptoMyPendingTransactionImpl(tools::CryptoMyWallet *cryptomy_wallet)
+    : mWallet(cryptomy_wallet)
 {
   m_status = Status_Ok;
 }
 
-GraftPendingTransactionImpl::~GraftPendingTransactionImpl()
+CryptoMyPendingTransactionImpl::~CryptoMyPendingTransactionImpl()
 {
 
 }
 
-int GraftPendingTransactionImpl::status() const
+int CryptoMyPendingTransactionImpl::status() const
 {
     return m_status;
 }
 
-string GraftPendingTransactionImpl::errorString() const
+string CryptoMyPendingTransactionImpl::errorString() const
 {
     return m_errorString;
 }
 
-std::vector<std::string> GraftPendingTransactionImpl::txid() const
+std::vector<std::string> CryptoMyPendingTransactionImpl::txid() const
 {
     std::vector<std::string> txid;
     for (const auto &pt: m_pending_tx)
@@ -72,7 +72,7 @@ std::vector<std::string> GraftPendingTransactionImpl::txid() const
     return txid;
 }
 
-bool GraftPendingTransactionImpl::commit(const std::string &filename, bool overwrite)
+bool CryptoMyPendingTransactionImpl::commit(const std::string &filename, bool overwrite)
 {
 
     LOG_PRINT_L3("m_pending_tx size: " << m_pending_tx.size());
@@ -130,7 +130,7 @@ bool GraftPendingTransactionImpl::commit(const std::string &filename, bool overw
     return m_status == Status_Ok;
 }
 
-uint64_t GraftPendingTransactionImpl::amount() const
+uint64_t CryptoMyPendingTransactionImpl::amount() const
 {
     uint64_t result = 0;
     for (const auto &ptx : m_pending_tx)   {
@@ -141,7 +141,7 @@ uint64_t GraftPendingTransactionImpl::amount() const
     return result;
 }
 
-uint64_t GraftPendingTransactionImpl::dust() const
+uint64_t CryptoMyPendingTransactionImpl::dust() const
 {
     uint64_t result = 0;
     for (const auto & ptx : m_pending_tx) {
@@ -150,7 +150,7 @@ uint64_t GraftPendingTransactionImpl::dust() const
     return result;
 }
 
-uint64_t GraftPendingTransactionImpl::fee() const
+uint64_t CryptoMyPendingTransactionImpl::fee() const
 {
     uint64_t result = 0;
     for (const auto &ptx : m_pending_tx) {
@@ -159,22 +159,22 @@ uint64_t GraftPendingTransactionImpl::fee() const
     return result;
 }
 
-uint64_t GraftPendingTransactionImpl::txCount() const
+uint64_t CryptoMyPendingTransactionImpl::txCount() const
 {
     return m_pending_tx.size();
 }
 
-void GraftPendingTransactionImpl::setPendingTx(std::vector<tools::GraftWallet::pending_tx> pending_tx)
+void CryptoMyPendingTransactionImpl::setPendingTx(std::vector<tools::CryptoMyWallet::pending_tx> pending_tx)
 {
     m_pending_tx = pending_tx;
 }
 
-void GraftPendingTransactionImpl::setStatus(int status)
+void CryptoMyPendingTransactionImpl::setStatus(int status)
 {
     m_status = status;
 }
 
-void GraftPendingTransactionImpl::setErrorString(const string &message)
+void CryptoMyPendingTransactionImpl::setErrorString(const string &message)
 {
     m_errorString = message;
 }

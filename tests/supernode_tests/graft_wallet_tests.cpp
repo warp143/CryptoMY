@@ -52,14 +52,14 @@
 #include <chrono>
 #include <thread>
 
-#include "supernode/graft_wallet.h"
+#include "supernode/cryptomy_wallet.h"
 
 using namespace supernode;
 using namespace tools;
 using namespace Monero;
 
 
-struct GraftWalletTest : public testing::Test
+struct CryptoMyWalletTest : public testing::Test
 {
     std::string wallet_account1;
     std::string wallet_account2;
@@ -68,33 +68,33 @@ struct GraftWalletTest : public testing::Test
     const std::string DAEMON_ADDR = "localhost:28281";
 
 
-    GraftWalletTest()
+    CryptoMyWalletTest()
     {
-        GraftWallet * wallet1 = new GraftWallet(true, false);
-        GraftWallet *wallet2 = new GraftWallet(true, false);
+        CryptoMyWallet * wallet1 = new CryptoMyWallet(true, false);
+        CryptoMyWallet *wallet2 = new CryptoMyWallet(true, false);
         wallet_root_path = epee::string_tools::get_current_module_folder() + "/../data/supernode/test_wallets";
         string wallet_path1 = wallet_root_path + "/miner_wallet";
         string wallet_path2 = wallet_root_path + "/stake_wallet";
         wallet1->load(wallet_path1, "");
         wallet2->load(wallet_path2, "");
         // serialize test wallets
-        wallet_account1 = wallet1->store_keys_graft("", false);
+        wallet_account1 = wallet1->store_keys_cryptomy("", false);
         delete wallet1;
-        wallet_account2 = wallet2->store_keys_graft("", false);
+        wallet_account2 = wallet2->store_keys_cryptomy("", false);
         delete wallet2;
     }
 
-    ~GraftWalletTest()
+    ~CryptoMyWalletTest()
     {
     }
 
 };
 
 
-TEST_F(GraftWalletTest, StoreAndLoadCache)
+TEST_F(CryptoMyWalletTest, StoreAndLoadCache)
 {
-    GraftWallet *wallet = new GraftWallet(true, false);
-    ASSERT_NO_THROW(wallet->load_graft(wallet_account1, "", ""));
+    CryptoMyWallet *wallet = new CryptoMyWallet(true, false);
+    ASSERT_NO_THROW(wallet->load_cryptomy(wallet_account1, "", ""));
     // connect to daemon and get the blocks
     wallet->init(DAEMON_ADDR);
     wallet->refresh();
@@ -109,8 +109,8 @@ TEST_F(GraftWalletTest, StoreAndLoadCache)
     boost::system::error_code ignored_ec;
     ASSERT_TRUE(boost::filesystem::exists(cache_filename, ignored_ec));
     // creating new wallet from serialized keys
-    wallet = new GraftWallet(true, false);
-    ASSERT_NO_THROW(wallet->load_graft(wallet_account1, "", cache_filename));
+    wallet = new CryptoMyWallet(true, false);
+    ASSERT_NO_THROW(wallet->load_cryptomy(wallet_account1, "", cache_filename));
     // check if we loaded blocks from cache
     ASSERT_TRUE(wallet->get_blockchain_current_height() > 100);
     std::cout << "cache stored to: " << cache_filename << std::endl;
@@ -118,10 +118,10 @@ TEST_F(GraftWalletTest, StoreAndLoadCache)
     delete wallet;
 }
 
-TEST_F(GraftWalletTest, LoadWrongCache)
+TEST_F(CryptoMyWalletTest, LoadWrongCache)
 {
-    GraftWallet *wallet = new GraftWallet(true, false);
-    ASSERT_NO_THROW(wallet->load_graft(wallet_account1, "", ""));
+    CryptoMyWallet *wallet = new CryptoMyWallet(true, false);
+    ASSERT_NO_THROW(wallet->load_cryptomy(wallet_account1, "", ""));
     // connect to daemon and get the blocks
     wallet->init(DAEMON_ADDR);
     wallet->refresh();
@@ -136,17 +136,17 @@ TEST_F(GraftWalletTest, LoadWrongCache)
     boost::system::error_code ignored_ec;
     ASSERT_TRUE(boost::filesystem::exists(cache_filename, ignored_ec));
     // creating new wallet object, try to load cache from different one
-    wallet = new GraftWallet(true, false);
-    ASSERT_ANY_THROW(wallet->load_graft(wallet_account2, "", cache_filename));
+    wallet = new CryptoMyWallet(true, false);
+    ASSERT_ANY_THROW(wallet->load_cryptomy(wallet_account2, "", cache_filename));
     boost::filesystem::remove(temp);
     delete wallet;
 }
 
 // implemented here; normally we need the same for wallet/wallet2.cpp
-TEST_F(GraftWalletTest, UseForkRule)
+TEST_F(CryptoMyWalletTest, UseForkRule)
 {
-    GraftWallet *wallet = new GraftWallet(true, false);
-    ASSERT_NO_THROW(wallet->load_graft(wallet_account1, "", ""));
+    CryptoMyWallet *wallet = new CryptoMyWallet(true, false);
+    ASSERT_NO_THROW(wallet->load_cryptomy(wallet_account1, "", ""));
     // connect to daemon and get the blocks
     wallet->init(DAEMON_ADDR);
     ASSERT_TRUE(wallet->use_fork_rules(2, 0));

@@ -28,7 +28,7 @@
 //
 
 #include "WalletPayObject.h"
-#include "graft_defines.h"
+#include "cryptomy_defines.h"
 #include "WalletProxy.h"
 
 void supernode::WalletPayObject::Owner(WalletProxy* o) { m_Owner = o; }
@@ -151,7 +151,7 @@ bool supernode::WalletPayObject::PutTXToPool() {
 
     //for(auto& a : m_Signs) LOG_PRINT_L5("sign in m_Signs: "<<a);
 
-    GraftTxExtra tx_extra;
+    CryptoMyTxExtra tx_extra;
     tx_extra.BlockNum = 123;
     tx_extra.PaymentID = TransactionRecord.PaymentID;
     tx_extra.Signs = m_Signs;

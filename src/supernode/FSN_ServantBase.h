@@ -112,9 +112,9 @@ namespace supernode {
 
     protected:
         bool  m_testnet = false;
-        // IP address for access to graft node
+        // IP address for access to cryptomy node
         std::string m_nodeIp;
-        // TCP port  for access to graft node
+        // TCP port  for access to cryptomy node
         int m_nodePort;
         std::string m_nodelogin;
         std::string m_nodePassword;

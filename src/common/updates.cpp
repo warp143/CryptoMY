@@ -41,7 +41,7 @@ namespace tools
     std::vector<std::string> records;
     bool found = false;
 
-    // graft: disable monero updates
+    // cryptomy: disable monero updates
     return true;
 
     MDEBUG("Checking updates for " << buildtag << " " << software);

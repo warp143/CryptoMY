@@ -29,7 +29,7 @@
 #include "mnemonics/electrum-words.h"
 #include "common/command_line.h"
 #include "baseclientproxy.h"
-#include "graft_defines.h"
+#include "cryptomy_defines.h"
 #include "string_coding.h"
 #include "common/util.h"
 
@@ -49,7 +49,7 @@ void supernode::BaseClientProxy::Init()
 
 bool supernode::BaseClientProxy::GetWalletBalance(const supernode::rpc_command::GET_WALLET_BALANCE::request &in, supernode::rpc_command::GET_WALLET_BALANCE::response &out)
 {
-    std::unique_ptr<tools::GraftWallet> wal = initWallet(base64_decode(in.Account), in.Password);
+    std::unique_ptr<tools::CryptoMyWallet> wal = initWallet(base64_decode(in.Account), in.Password);
     if (!wal)
     {
         out.Result = ERROR_OPEN_WALLET_FAILED;
@@ -83,8 +83,8 @@ bool supernode::BaseClientProxy::CreateAccount(const supernode::rpc_command::CRE
         return false;
     }
 
-    std::unique_ptr<tools::GraftWallet> wal =
-            tools::GraftWallet::createWallet(std::string(), m_Servant->GetNodeIp(), m_Servant->GetNodePort(),
+    std::unique_ptr<tools::CryptoMyWallet> wal =
+            tools::CryptoMyWallet::createWallet(std::string(), m_Servant->GetNodeIp(), m_Servant->GetNodePort(),
                                              m_Servant->GetNodeLogin(), m_Servant->IsTestnet());
     if (!wal)
     {
@@ -96,14 +96,14 @@ bool supernode::BaseClientProxy::CreateAccount(const supernode::rpc_command::CRE
     crypto::secret_key dummy_key;
     try
     {
-        wal->generate_graft(in.Password, dummy_key, false, false);
+        wal->generate_cryptomy(in.Password, dummy_key, false, false);
     }
     catch (const std::exception& e)
     {
         out.Result = ERROR_CREATE_WALLET_FAILED;
         return false;
     }
-    out.Account = base64_encode(wal->store_keys_graft(in.Password));
+    out.Account = base64_encode(wal->store_keys_cryptomy(in.Password));
     out.Address = wal->get_account().get_public_address_str(wal->testnet());
     out.ViewKey = epee::string_tools::pod_to_hex(wal->get_account().get_keys().m_view_secret_key);
     std::string seed;
@@ -115,7 +115,7 @@ bool supernode::BaseClientProxy::CreateAccount(const supernode::rpc_command::CRE
 
 bool supernode::BaseClientProxy::GetSeed(const supernode::rpc_command::GET_SEED::request &in, supernode::rpc_command::GET_SEED::response &out)
 {
-    std::unique_ptr<tools::GraftWallet> wal = initWallet(base64_decode(in.Account), in.Password);
+    std::unique_ptr<tools::CryptoMyWallet> wal = initWallet(base64_decode(in.Account), in.Password);
     if (!wal)
     {
         out.Result = ERROR_OPEN_WALLET_FAILED;
@@ -143,8 +143,8 @@ bool supernode::BaseClientProxy::RestoreAccount(const supernode::rpc_command::RE
         out.Result = ERROR_ELECTRUM_SEED_INVALID;
         return false;
     }
-    std::unique_ptr<tools::GraftWallet> wal =
-        tools::GraftWallet::createWallet(std::string(), m_Servant->GetNodeIp(), m_Servant->GetNodePort(),
+    std::unique_ptr<tools::CryptoMyWallet> wal =
+        tools::CryptoMyWallet::createWallet(std::string(), m_Servant->GetNodeIp(), m_Servant->GetNodePort(),
                                              m_Servant->GetNodeLogin(), m_Servant->IsTestnet());
     if (!wal)
     {
@@ -154,8 +154,8 @@ bool supernode::BaseClientProxy::RestoreAccount(const supernode::rpc_command::RE
     try
     {
         wal->set_seed_language(old_language);
-        wal->generate_graft(in.Password, recovery_key, true, false);
-        out.Account = base64_encode(wal->store_keys_graft(in.Password));
+        wal->generate_cryptomy(in.Password, recovery_key, true, false);
+        out.Account = base64_encode(wal->store_keys_cryptomy(in.Password));
         out.Address = wal->get_account().get_public_address_str(wal->testnet());
         out.ViewKey = epee::string_tools::pod_to_hex(
                     wal->get_account().get_keys().m_view_secret_key);
@@ -172,12 +172,12 @@ bool supernode::BaseClientProxy::RestoreAccount(const supernode::rpc_command::RE
     return true;
 }
 
-std::unique_ptr<tools::GraftWallet> supernode::BaseClientProxy::initWallet(const string &account, const string &password) const
+std::unique_ptr<tools::CryptoMyWallet> supernode::BaseClientProxy::initWallet(const string &account, const string &password) const
 {
-    std::unique_ptr<tools::GraftWallet> wal;
+    std::unique_ptr<tools::CryptoMyWallet> wal;
     try
     {
-        wal = tools::GraftWallet::createWallet(account, password, "",
+        wal = tools::CryptoMyWallet::createWallet(account, password, "",
                                                m_Servant->GetNodeIp(), m_Servant->GetNodePort(),
                                          m_Servant->GetNodeLogin(), m_Servant->IsTestnet());
         std::string lDataDir = tools::get_default_data_dir() + scWalletCachePath;
@@ -199,7 +199,7 @@ std::unique_ptr<tools::GraftWallet> supernode::BaseClientProxy::initWallet(const
     return wal;
 }
 
-void supernode::BaseClientProxy::storeWalletState(std::unique_ptr<tools::GraftWallet> wallet)
+void supernode::BaseClientProxy::storeWalletState(std::unique_ptr<tools::CryptoMyWallet> wallet)
 {
     if (wallet)
     {

@@ -76,7 +76,7 @@ file(COPY
   data/signed_monero_tx
   DESTINATION data)
 
-# graft supernode data
+# cryptomy supernode data
 file(COPY
     data/supernode
     DESTINATION data)

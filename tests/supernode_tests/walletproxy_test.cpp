@@ -58,7 +58,7 @@
 #include "supernode/TxPool.h"
 #include "supernode/WalletProxy.h"
 #include "supernode/WalletPayObject.h"
-#include "supernode/graft_wallet.h"
+#include "supernode/cryptomy_wallet.h"
 #include "supernode/PosProxy.h"
 #include "supernode/AuthSample.h"
 #include "supernode/api/pending_transaction.h"
@@ -161,13 +161,13 @@ struct Supernode
 };
 
 
-struct GraftRTATest1 : public testing::Test
+struct CryptoMyRTATest1 : public testing::Test
 {
     std::string wallet_account;
     std::string wallet_root_path;
     std::string bdb_path;
     const std::string DAEMON_ADDR = "localhost:28281";
-    const uint64_t AMOUNT_10_GRF = 10000000000000;
+    const uint64_t AMOUNT_10_CMY = 10000000000000;
     const std::string DST_WALLET_ADDR = "T6SnKmirXp6geLAoB7fn2eV51Ctr1WH1xWDnEGzS9pvQARTJQUXupiRKGR7czL7b5XdDnYXosVJu6Wj3Y3NYfiEA2sU2QiGVa";
     const std::string DST_WALLET_VIEWKEY = "8c0ccff03e9f2a9805e200f887731129495ff793dc678db6c5b53df814084f04";
 
@@ -176,19 +176,19 @@ struct GraftRTATest1 : public testing::Test
     string WalletProxyPort = "7500";
     string PosProxyPort = "8500";
 
-    GraftRTATest1()
+    CryptoMyRTATest1()
     {
-        GraftWallet *wallet = new GraftWallet(true, false);
+        CryptoMyWallet *wallet = new CryptoMyWallet(true, false);
         wallet_root_path = epee::string_tools::get_current_module_folder() + "/../data/supernode/test_wallets";
         string wallet_path = wallet_root_path + "/miner_wallet";
         bdb_path  = epee::string_tools::get_current_module_folder() + "/../data/supernode/test_blockchain";
         wallet->load(wallet_path, "");
         // serialize test wallet
-        wallet_account = wallet->store_keys_graft("", false);
+        wallet_account = wallet->store_keys_cryptomy("", false);
         delete wallet;
     }
 
-    ~GraftRTATest1()
+    ~CryptoMyRTATest1()
     {
 
     }
@@ -236,7 +236,7 @@ struct GraftRTATest1 : public testing::Test
         rpc_command::POS_SALE::request sale_in;
         rpc_command::POS_SALE::response sale_out;
 
-        sale_in.Amount = AMOUNT_10_GRF;
+        sale_in.Amount = AMOUNT_10_CMY;
         sale_in.POSSaleDetails = "Some data";
         // 1. what is POS address here?
         sale_in.POSAddress = DST_WALLET_ADDR;
@@ -319,7 +319,7 @@ TEST_F(WalletProxyTest, SendTx)
     ASSERT_FALSE(wallet_account.empty());
 
 
-    FSN_Servant * servant = new FSN_Servant(bdb_path, DAEMON_ADDR, "", "", "/tmp/graft/fsn-wallets", true);
+    FSN_Servant * servant = new FSN_Servant(bdb_path, DAEMON_ADDR, "", "", "/tmp/cryptomy/fsn-wallets", true);
     DAPI_RPC_Server * dapi = new DAPI_RPC_Server();
     WalletProxy * walletProxy = new WalletProxy();
 
@@ -332,11 +332,11 @@ TEST_F(WalletProxyTest, SendTx)
     walletProxy->Set(servant, dapi);
 
 
-    std::unique_ptr<GraftWallet> wallet = walletProxy->initWallet(wallet_account, "");
+    std::unique_ptr<CryptoMyWallet> wallet = walletProxy->initWallet(wallet_account, "");
     ASSERT_TRUE(wallet.get());
     wallet->refresh();
 
-    GraftTxExtra tx_extra;
+    CryptoMyTxExtra tx_extra;
     tx_extra.BlockNum = 123;
     tx_extra.PaymentID = "Hello";
     tx_extra.Signs.push_back("T6SnKmirXp6geLAoB7fn2eV51Ctr1WH1xWDnEGzS9pvQARTJQUXupiRKGR7czL7b5XdDnYXosVJu6Wj3Y3NYfiEA2sU2QiGVa");
@@ -346,7 +346,7 @@ TEST_F(WalletProxyTest, SendTx)
     PendingTransaction * ptx =
             wallet->createTransaction(DST_WALLET_ADDR,
                                       "",
-                                      AMOUNT_10_GRF,
+                                      AMOUNT_10_CMY,
                                       0,
                                       tx_extra,
                                       Monero::PendingTransaction::Priority_Medium
@@ -377,8 +377,8 @@ TEST_F(WalletProxyTest, SendTx)
 
     ASSERT_EQ(hash, tx.hash);
 
-    GraftTxExtra out_extra;
-    ASSERT_TRUE(cryptonote::get_graft_tx_extra_from_extra(tx, out_extra));
+    CryptoMyTxExtra out_extra;
+    ASSERT_TRUE(cryptonote::get_cryptomy_tx_extra_from_extra(tx, out_extra));
     delete ptx;
 
     ASSERT_EQ(tx_extra, out_extra);
@@ -388,19 +388,19 @@ TEST_F(WalletProxyTest, SendTx)
     //    rpc_command::WALLET_PAY::request req;
     //    rpc_command::WALLET_PAY::response resp;
     //    req.Account = wallet_account;
-    //    req.Amount = 1000000000; // 1 GRF
+    //    req.Amount = 1000000000; // 1 CMY
     //    ASSERT_TRUE(walletProxy->Pay(req, resp));
 
 }
 */
 
-TEST_F(GraftRTATest1, TestWalletProxyPay)
+TEST_F(CryptoMyRTATest1, TestWalletProxyPay)
 {
     //    ASSERT_FALSE(wallet_account.empty());
     //    const std::string DST_WALLET_ADDR = "T6SnKmirXp6geLAoB7fn2eV51Ctr1WH1xWDnEGzS9pvQARTJQUXupiRKGR7czL7b5XdDnYXosVJu6Wj3Y3NYfiEA2sU2QiGVa";
 
 
-    //    FSN_Servant * servant = new FSN_Servant_Test(bdb_path, DAEMON_ADDR, "/tmp/graft/fsn-wallets", true);
+    //    FSN_Servant * servant = new FSN_Servant_Test(bdb_path, DAEMON_ADDR, "/tmp/cryptomy/fsn-wallets", true);
     //    DAPI_RPC_Server * dapi = new DAPI_RPC_Server();
     //    WalletProxy * walletProxy = new WalletProxy();
 
@@ -413,7 +413,7 @@ TEST_F(GraftRTATest1, TestWalletProxyPay)
     //    rpc_command::WALLET_PAY::response out;
 
     //    in.Account = wallet_account;
-    //    in.Amount  = AMOUNT_10_GRF;
+    //    in.Amount  = AMOUNT_10_CMY;
     //    in.POSAddress = DST_WALLET_ADDR;
     //    in.PaymentID = "1234567890";
     //    in.POSSaleDetails = "1234567890";

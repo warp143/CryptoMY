@@ -43,7 +43,7 @@ static unsigned s_AuthSampleSize = 8;
 namespace supernode {
 
 namespace consts {
-    static const string DEFAULT_FSN_WALLETS_DIR = "/tmp/graft/fsn_data/wallets_vo";
+    static const string DEFAULT_FSN_WALLETS_DIR = "/tmp/cryptomy/fsn_data/wallets_vo";
     static const int    DEFAULT_FSN_WALLET_REFRESH_INTERVAL_MS = 5000;
 }
 

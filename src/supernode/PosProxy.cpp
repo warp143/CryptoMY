@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#include "graft_defines.h"
+#include "cryptomy_defines.h"
 #include "PosProxy.h"
 
 void supernode::PosProxy::Init() {

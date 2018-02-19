@@ -1,4 +1,4 @@
-# Graft Network
+# CryptoMy Network
 
 Copyright (c) 2017, The CryptoMY Project
 
@@ -10,8 +10,8 @@ Portions Copyright (c) 2012-2013, The Cryptonote developers
 
 ## Development Resources
 
-- Web: [graft.network](https://www.graft.network)
-- GitHub: [https://github.com/graft-project/GraftNetwork](https://github.com/graft-project/GraftNetwork)
+- Web: [cryptomy.network](https://www.cryptomy.network)
+- GitHub: [https://github.com/cryptomy-project/CryptoMyNetwork](https://github.com/cryptomy-project/CryptoMyNetwork)
 - Monero GitHub: [https://github.com/monero-project/monero](https://github.com/monero-project/monero)
 
 ## Build
@@ -27,25 +27,25 @@ Portions Copyright (c) 2012-2013, The Cryptonote developers
 
 ## Introduction
 
-Graft Network is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
+CryptoMy Network is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
 
-**Privacy:** Graft Network uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain absolutely private by default.
+**Privacy:** CryptoMy Network uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain absolutely private by default.
 
 **Security:** Using the power of a distributed peer-to-peer consensus network, every transaction on the network is cryptographically secured. Individual wallets have a 25 word mnemonic seed that is only displayed once, and can be written down to backup the wallet. Wallet files are encrypted with a passphrase to ensure they are useless if stolen.
 
-**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, Graft Network is able to ensure that transactions are not only untraceable, but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
+**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, CryptoMy Network is able to ensure that transactions are not only untraceable, but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
 
 ## About this Project
 
-This is the core implementation of Graft Network. It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Graft Network that uses the protocol and network in a compatible manner.
+This is the core implementation of CryptoMy Network. It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of CryptoMy Network that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
 
-**Anyone is welcome to contribute to Graft Network's codebase!** If you have a fix or code change, feel free to submit it as a pull request directly to the "master" branch. In cases where the change is relatively small or does not affect other parts of the codebase it may be merged in immediately by any one of the collaborators. On the other hand, if the change is particularly large or complex, it is expected that it will be discussed at length either well in advance of the pull request being submitted, or even directly on the pull request.
+**Anyone is welcome to contribute to CryptoMy Network's codebase!** If you have a fix or code change, feel free to submit it as a pull request directly to the "master" branch. In cases where the change is relatively small or does not affect other parts of the codebase it may be merged in immediately by any one of the collaborators. On the other hand, if the change is particularly large or complex, it is expected that it will be discussed at length either well in advance of the pull request being submitted, or even directly on the pull request.
 
 ## Supporting the Project
 
-Graft Network development can be supported directly through donations.
+CryptoMy Network development can be supported directly through donations.
 
 ## License
 
@@ -59,24 +59,24 @@ If you want to help out, see [CONTRIBUTING](CONTRIBUTING.md) for a set of guidel
 
 See [Vulnerability Response Process](VULNERABILITY_RESPONSE_PROCESS.md).
 
-## Graft Network software updates and consensus protocol changes (hard fork schedule)
+## CryptoMy Network software updates and consensus protocol changes (hard fork schedule)
 
-Graft Network uses a fixed-schedule hard fork mechanism to implement new features. This means that users of Graft Network (end users and service providers) need to run current versions and update their software on a regular schedule. Here is the current schedule, versions, and compatibility.
+CryptoMy Network uses a fixed-schedule hard fork mechanism to implement new features. This means that users of CryptoMy Network (end users and service providers) need to run current versions and update their software on a regular schedule. Here is the current schedule, versions, and compatibility.
 Dates are provided in the format YYYY-MM-DD. 
 
 
-| Fork Date              | Consensus version | Minimum Graft Network Version | Recommended Graft Network Version | Details            |  
+| Fork Date              | Consensus version | Minimum CryptoMy Network Version | Recommended CryptoMy Network Version | Details            |  
 | ----------------- | ----------------- | ---------------------- | -------------------------- | ------------------ |
 | 2016-09-21        | v3                | v0.9.4                 | v0.10.0                    | Splits coinbase into denominations  |
 | 2017-01-05        | v4                | v0.10.1                 | v0.10.2.1                   | Allow normal and RingCT transactions |
 | 2017-04-15        | v5                | v0.10.3.0               | v0.10.3.1                    | Adjusted minimum blocksize and fee algorithm      |
 | 2017-09-21        | v6                | Not determined as of 2017-03-27                | Not determined as of 2017-03-27                    | Allow only RingCT transactions      |
 
-## Installing Graft Network from a Package
+## Installing CryptoMy Network from a Package
 
 Not available yet!
 
-## Compiling Graft Network from Source
+## Compiling CryptoMy Network from Source
 
 ### Dependencies
 
@@ -111,7 +111,7 @@ build the library binary manually. This can be done with the following command `
 
 ### Build instructions
 
-Graft Network uses the CMake build system and a top-level [Makefile](Makefile) that
+CryptoMy Network uses the CMake build system and a top-level [Makefile](Makefile) that
 invokes cmake commands as needed.
 
 #### On Linux and OS X
@@ -119,7 +119,7 @@ invokes cmake commands as needed.
 * Install the dependencies
 * Change to the root of the source code directory and build:
 
-        cd GraftNetwork
+        cd CryptoMyNetwork
         make
 
     *Optional*: If your machine has several cores and enough memory, enable
@@ -129,9 +129,9 @@ invokes cmake commands as needed.
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/GraftNetwork/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/CryptoMyNetwork/build/release/bin"` to `.profile`
 
-* Run Graft Network with `cryptomyd --detach`
+* Run CryptoMy Network with `cryptomyd --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -157,7 +157,7 @@ Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from ht
 
 * `apt-get update && apt-get upgrade` to install all of the latest software
 
-* Install the dependencies for Graft Network except libunwind and libboost-all-dev
+* Install the dependencies for CryptoMy Network except libunwind and libboost-all-dev
 
 * Increase the system swap size:
 ```	
@@ -183,16 +183,16 @@ Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from ht
 
 * Change to the root of the source code directory and build:
 ```
-        cd GraftNetwork
+        cd CryptoMyNetwork
         make release
 ```
 * Wait ~4 hours
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/GraftNetwork/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/CryptoMyNetwork/build/release/bin"` to `.profile`
 
-* Run Graft Network with `cryptomyd --detach`
+* Run CryptoMy Network with `cryptomyd --detach`
 
 * You may wish to reduce the size of the swap file after the build has finished, and delete the boost directory from your home directory
 
@@ -247,9 +247,9 @@ application.
 
 ### On FreeBSD:
 
-The project can be built from scratch by following instructions for Linux above. If you are running Graft Network in a jail you need to add the flag: `allow.sysvipc=1` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
+The project can be built from scratch by following instructions for Linux above. If you are running CryptoMy Network in a jail you need to add the flag: `allow.sysvipc=1` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
 
-We expect to add Graft Network into the ports tree in the near future, which will aid in managing installations using ports or packages.
+We expect to add CryptoMy Network into the ports tree in the near future, which will aid in managing installations using ports or packages.
 
 ### On OpenBSD:
 
@@ -262,7 +262,7 @@ The doxygen and graphviz packages are optional and require the xbase set.
 The Boost package has a bug that will prevent librpc.a from building correctly. In order to fix this, you will have to Build boost yourself from scratch. Follow the directions here (under "Building Boost"):
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-openbsd.md
 
-You will have to add the serialization, date_time, and regex modules to Boost when building as they are needed by Graft Network.
+You will have to add the serialization, date_time, and regex modules to Boost when building as they are needed by CryptoMy Network.
 
 To build: `env CC=egcc CXX=eg++ CPP=ecpp DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/path/to/the/boost/you/built make release-static-64`
 
@@ -299,7 +299,7 @@ To run in background:
 To run as a systemd service, copy
 [cryptomyd.service](utils/systemd/cryptomyd.service) to `/etc/systemd/system/` and
 [cryptomyd.conf](utils/conf/cryptomyd.conf) to `/etc/`. The [example
-service](utils/systemd/cryptomyd.service) assumes that the user `graftnode` exists
+service](utils/systemd/cryptomyd.service) assumes that the user `cryptomynode` exists
 and its home is the data directory specified in the [example
 config](utils/conf/cryptomyd.conf).
 
@@ -312,7 +312,7 @@ See [README.i18n.md](README.i18n.md).
 
 ## Using Tor
 
-While Graft Network isn't made to integrate with Tor, it can be used wrapped with torsocks, if you add --p2p-bind-ip 127.0.0.1 to the cryptomyd command line. You also want to set DNS requests to go over TCP, so they'll be routed through Tor, by setting DNS_PUBLIC=tcp. You may also disable IGD (UPnP port forwarding negotiation), which is pointless with Tor. To allow local connections from the wallet, you might have to add TORSOCKS_ALLOW_INBOUND=1, some OSes need it and some don't. Example:
+While CryptoMy Network isn't made to integrate with Tor, it can be used wrapped with torsocks, if you add --p2p-bind-ip 127.0.0.1 to the cryptomyd command line. You also want to set DNS requests to go over TCP, so they'll be routed through Tor, by setting DNS_PUBLIC=tcp. You may also disable IGD (UPnP port forwarding negotiation), which is pointless with Tor. To allow local connections from the wallet, you might have to add TORSOCKS_ALLOW_INBOUND=1, some OSes need it and some don't. Example:
 
 `DNS_PUBLIC=tcp torsocks cryptomyd --p2p-bind-ip 127.0.0.1 --no-igd`
 
@@ -338,7 +338,7 @@ Note: rlwrap will save things like your seed and private keys, if you supply the
 
 # Debugging
 
-This section contains general instructions for debugging failed installs or problems encountered with Graft Network. First ensure you are running the latest version built from the github repo.
+This section contains general instructions for debugging failed installs or problems encountered with CryptoMy Network. First ensure you are running the latest version built from the github repo.
 
 ## Obtaining Stack Traces and Core Dumps on Unix Systems
 
@@ -370,7 +370,7 @@ You can now analyse this core dump with `gdb` as follows:
 
 Print the stack trace with `bt`
 
-* To run Graft Network within gdb:
+* To run CryptoMy Network within gdb:
 
 Type `gdb /path/to/cryptomyd`
 
@@ -390,7 +390,7 @@ Instructions for debugging suspected blockchain corruption as per @HYC
 
 There is an `mdb_stat` command in the LMDB source that can print statistics about the database but it's not routinely built. This can be built with the following command:
 
-`cd ~/GraftNetwork/external/db_drivers/liblmdb && make`
+`cd ~/CryptoMyNetwork/external/db_drivers/liblmdb && make`
 
 The output of `mdb_stat -ea <path to blockchain dir>` will indicate inconsistencies in the blocks, block_heights and block_info table.
 

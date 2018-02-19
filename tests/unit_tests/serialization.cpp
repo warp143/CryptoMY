@@ -837,7 +837,7 @@ TEST(Serialization, portability_wallet)
   }
 }
 
-#define OUTPUT_EXPORT_FILE_MAGIC "Graft output export\003"
+#define OUTPUT_EXPORT_FILE_MAGIC "CryptoMy output export\003"
 TEST(Serialization, portability_outputs)
 {
   // read file
@@ -1068,7 +1068,7 @@ namespace helper {
     }
 }
 
-#define UNSIGNED_TX_PREFIX "Graft unsigned tx set\003"
+#define UNSIGNED_TX_PREFIX "CryptoMy unsigned tx set\003"
 TEST(Serialization, portability_unsigned_tx)
 {
   const string filename = epee::string_tools::get_current_module_folder() + "/../../../../tests/data/unsigned_monero_tx";
@@ -1221,7 +1221,7 @@ TEST(Serialization, portability_unsigned_tx)
 
 }
 
-#define SIGNED_TX_PREFIX "Graft signed tx set\003"
+#define SIGNED_TX_PREFIX "CryptoMy signed tx set\003"
 TEST(Serialization, portability_signed_tx)
 {
   const string filename = epee::string_tools::get_current_module_folder() + "/../../../../tests/data/signed_monero_tx";

@@ -29,7 +29,7 @@
 
 #include "PosSaleObject.h"
 #include "TxPool.h"
-#include "graft_defines.h"
+#include "cryptomy_defines.h"
 #include <ringct/rctSigs.h>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
@@ -171,25 +171,25 @@ bool supernode::PosSaleObject::PoSTRSigned(const rpc_command::POS_TR_SIGNED::req
 
 
     // Get the tx extra
-    GraftTxExtra graft_tx_extra;
-    if (!cryptonote::get_graft_tx_extra_from_extra(tx, graft_tx_extra)) {
-        LOG_ERROR("TX " << in.TransactionPoolID << " : error reading graft extra");
+    CryptoMyTxExtra cryptomy_tx_extra;
+    if (!cryptonote::get_cryptomy_tx_extra_from_extra(tx, cryptomy_tx_extra)) {
+        LOG_ERROR("TX " << in.TransactionPoolID << " : error reading cryptomy extra");
         return false;
     }
     // check all signs
     //LOG_PRINT_L2("AuthNodes.size : " << TransactionRecord.AuthNodes.size());
 
-    if (TransactionRecord.AuthNodes.size() != graft_tx_extra.Signs.size()) {
+    if (TransactionRecord.AuthNodes.size() != cryptomy_tx_extra.Signs.size()) {
         LOG_ERROR("TX " << in.TransactionPoolID << " : number of auth nodes and number of signs mismatch");
         return false;
     }
 
 
-    //LOG_PRINT_L5("graft_tx_extra.Signs: "<<graft_tx_extra.Signs.size()<<"  TransactionRecord.AuthNodes: "<<TransactionRecord.AuthNodes.size());
+    //LOG_PRINT_L5("cryptomy_tx_extra.Signs: "<<cryptomy_tx_extra.Signs.size()<<"  TransactionRecord.AuthNodes: "<<TransactionRecord.AuthNodes.size());
 
 
-    for (unsigned i = 0; i < graft_tx_extra.Signs.size(); ++i) {
-        const string &sign = graft_tx_extra.Signs.at(i);
+    for (unsigned i = 0; i < cryptomy_tx_extra.Signs.size(); ++i) {
+        const string &sign = cryptomy_tx_extra.Signs.at(i);
 
         if( CheckSign(TransactionRecord.AuthNodes[i]->Stake.Addr, sign) ) {
         	m_Signs++;

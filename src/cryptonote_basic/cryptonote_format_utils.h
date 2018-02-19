@@ -36,7 +36,7 @@
 #include "include_base_utils.h"
 #include "crypto/crypto.h"
 #include "crypto/hash.h"
-#include "supernode/grafttxextra.h"
+#include "supernode/cryptomytxextra.h"
 
 namespace cryptonote
 {
@@ -67,28 +67,28 @@ namespace cryptonote
   bool add_tx_pub_key_to_extra(transaction& tx, const crypto::public_key& tx_pub_key);
 
   /*!
-   * \brief add_graft_tx_extra_to_extra - adds graft extra fields to tx
+   * \brief add_cryptomy_tx_extra_to_extra - adds cryptomy extra fields to tx
    * \param tx            - transaction fields to be added to
-   * \param graft_extra   - graft fields to add
+   * \param cryptomy_extra   - cryptomy fields to add
    * \return              - true on success
    */
-  bool add_graft_tx_extra_to_extra(transaction &tx, const supernode::GraftTxExtra &graft_extra);
+  bool add_cryptomy_tx_extra_to_extra(transaction &tx, const supernode::CryptoMyTxExtra &cryptomy_extra);
 
   /*!
-   * @brief add_graft_tx_extra_to_extra - overloaded function to add graft extra directly to tx extra
+   * @brief add_cryptomy_tx_extra_to_extra - overloaded function to add cryptomy extra directly to tx extra
    * @param extra                 - extra to add fields to
-   * @param graft_extra           - graft fields to add
+   * @param cryptomy_extra           - cryptomy fields to add
    * @return                      - true on success
    */
-  bool add_graft_tx_extra_to_extra(std::vector<uint8_t>& extra, const supernode::GraftTxExtra &graft_extra);
+  bool add_cryptomy_tx_extra_to_extra(std::vector<uint8_t>& extra, const supernode::CryptoMyTxExtra &cryptomy_extra);
 
   /*!
-   * \brief get_graft_tx_extra_from_extra - read graft extra fields from tx extra
+   * \brief get_cryptomy_tx_extra_from_extra - read cryptomy extra fields from tx extra
    * \param tx                    - source transaction
-   * \param graft_tx_extra        - destination graft extra fields
+   * \param cryptomy_tx_extra        - destination cryptomy extra fields
    * \return                      - true on success
    */
-  bool get_graft_tx_extra_from_extra(const transaction &tx, supernode::GraftTxExtra &graft_tx_extra);
+  bool get_cryptomy_tx_extra_from_extra(const transaction &tx, supernode::CryptoMyTxExtra &cryptomy_tx_extra);
   bool add_extra_nonce_to_tx_extra(std::vector<uint8_t>& tx_extra, const blobdata& extra_nonce);
   bool remove_field_from_tx_extra(std::vector<uint8_t>& tx_extra, const std::type_info &type);
   void set_payment_id_to_tx_extra_nonce(blobdata& extra_nonce, const crypto::hash& payment_id);

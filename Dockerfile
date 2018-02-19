@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ENV SRC_DIR /usr/local/src/graft
+ENV SRC_DIR /usr/local/src/cryptomy
 
 RUN set -x \
   && buildDeps=' \
@@ -16,7 +16,7 @@ RUN set -x \
   && apt-get -qq update \
   && apt-get -qq --no-install-recommends install $buildDeps
 
-RUN git clone https://github.com/graft-project/GraftNetwork.git $SRC_DIR
+RUN git clone https://github.com/cryptomy-project/CryptoMyNetwork.git $SRC_DIR
 WORKDIR $SRC_DIR
 RUN make -j$(nproc) release-static
 
@@ -26,7 +26,7 @@ RUN cp build/release/bin/* /usr/local/bin/ \
   && apt-get -qq --auto-remove purge $buildDeps
 
 # Contains the blockchain
-VOLUME /root/.graft
+VOLUME /root/.cryptomy
 
 # Generate your wallet via accessing the container and run:
 # cd /wallet

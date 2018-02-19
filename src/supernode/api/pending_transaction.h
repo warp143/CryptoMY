@@ -29,7 +29,7 @@
 // Parts of this file are originally copyright (c) 2014-2017, The Monero Project
 
 #include "wallet/wallet2_api.h"
-#include "../graft_wallet.h"
+#include "../cryptomy_wallet.h"
 
 #include <string>
 #include <vector>
@@ -37,11 +37,11 @@
 
 namespace Monero {
 
-class GraftPendingTransactionImpl : public PendingTransaction
+class CryptoMyPendingTransactionImpl : public PendingTransaction
 {
 public:
-    GraftPendingTransactionImpl(tools::GraftWallet *graft_wallet);
-    ~GraftPendingTransactionImpl();
+    CryptoMyPendingTransactionImpl(tools::CryptoMyWallet *cryptomy_wallet);
+    ~CryptoMyPendingTransactionImpl();
     int status() const;
     std::string errorString() const;
     bool commit(const std::string &filename = "", bool overwrite = false);
@@ -51,16 +51,16 @@ public:
     std::vector<std::string> txid() const;
     uint64_t txCount() const;
     // TODO: continue with interface;
-    void setPendingTx(std::vector<tools::GraftWallet::pending_tx> pending_tx);
+    void setPendingTx(std::vector<tools::CryptoMyWallet::pending_tx> pending_tx);
     void setStatus(int status);
     void setErrorString(const std::string &message);
 
 private:
-    tools::GraftWallet *mWallet;
+    tools::CryptoMyWallet *mWallet;
 
     int  m_status;
     std::string m_errorString;
-    std::vector<tools::GraftWallet::pending_tx> m_pending_tx;
+    std::vector<tools::CryptoMyWallet::pending_tx> m_pending_tx;
 };
 
 

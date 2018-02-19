@@ -552,7 +552,7 @@ namespace cryptonote
   //---------------------------------------------------------------
   std::string get_unit(unsigned int decimal_point)
   {
-    return "graft";
+    return "cryptomy";
     if (decimal_point == (unsigned int)-1)
       decimal_point = default_decimal_point;
     switch (std::atomic_load(&default_decimal_point))
@@ -849,32 +849,32 @@ namespace cryptonote
     block_hashes_cached = block_hashes_cached_count;
   }
 
-  bool add_graft_tx_extra_to_extra(transaction &tx, const supernode::GraftTxExtra &graft_extra)
+  bool add_cryptomy_tx_extra_to_extra(transaction &tx, const supernode::CryptoMyTxExtra &cryptomy_extra)
   {
-      return add_graft_tx_extra_to_extra(tx.extra, graft_extra);
+      return add_cryptomy_tx_extra_to_extra(tx.extra, cryptomy_extra);
   }
 
-  bool add_graft_tx_extra_to_extra(std::vector<uint8_t>& extra, const supernode::GraftTxExtra &graft_extra)
+  bool add_cryptomy_tx_extra_to_extra(std::vector<uint8_t>& extra, const supernode::CryptoMyTxExtra &cryptomy_extra)
   {
       std::string blob;
-      ::serialization::dump_binary(const_cast<supernode::GraftTxExtra&>(graft_extra), blob);
-      tx_extra_graft_extra container;
+      ::serialization::dump_binary(const_cast<supernode::CryptoMyTxExtra&>(cryptomy_extra), blob);
+      tx_extra_cryptomy_extra container;
       container.data = blob;
       blob.clear();
       ::serialization::dump_binary(container, blob);
-      extra.push_back(TX_EXTRA_GRAFT_EXTRA_TAG);
+      extra.push_back(TX_EXTRA_CRYPTOMY_EXTRA_TAG);
       std::copy(blob.begin(), blob.end(), std::back_inserter(extra));
       return true;
   }
 
-  bool get_graft_tx_extra_from_extra(const transaction &tx, supernode::GraftTxExtra &graft_tx_extra)
+  bool get_cryptomy_tx_extra_from_extra(const transaction &tx, supernode::CryptoMyTxExtra &cryptomy_tx_extra)
   {
       std::vector<tx_extra_field> tx_extra_fields;
       parse_tx_extra(tx.extra, tx_extra_fields);
-      tx_extra_graft_extra graft_extra;
-      if(!find_tx_extra_field_by_type(tx_extra_fields, graft_extra))
+      tx_extra_cryptomy_extra cryptomy_extra;
+      if(!find_tx_extra_field_by_type(tx_extra_fields, cryptomy_extra))
         return false;
-      return ::serialization::parse_binary(graft_extra.data, graft_tx_extra);
+      return ::serialization::parse_binary(cryptomy_extra.data, cryptomy_tx_extra);
   }
 
 

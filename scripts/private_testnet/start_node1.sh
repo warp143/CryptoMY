@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# graftnoned expected to be copied to this directory
+# cryptomynoned expected to be copied to this directory
 
 $DIR/cryptomyd --testnet --testnet-p2p-bind-port 28280 \
     --rpc-bind-ip 0.0.0.0 --testnet-rpc-bind-port 28281 \

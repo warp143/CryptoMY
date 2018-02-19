@@ -63,7 +63,7 @@
 #include "supernode/P2P_Broadcast.h"
 #include "supernode/FSN_Servant_Test.h"
 #include "supernode/FSN_ActualList.h"
-#include "supernode/graft_wallet.h"
+#include "supernode/cryptomy_wallet.h"
 
 using namespace supernode;
 using namespace std;
@@ -173,7 +173,7 @@ namespace supernode {
 
 
 struct Test_RTA_FlowBlockChain : public testing::Test {
-	string s_TestDataPath;// = "/home/laid/Dev/Graft/GraftNetwork/build/debug/tests/data/supernode";
+	string s_TestDataPath;// = "/home/laid/Dev/CryptoMy/CryptoMyNetwork/build/debug/tests/data/supernode";
 
 	public:
 	struct Supernode {
@@ -360,9 +360,9 @@ struct Test_RTA_FlowBlockChain : public testing::Test {
 		pay_in.PaymentID = sale_out.PaymentID;
 		{
 		string wallet_path = s_TestDataPath + "/test_wallets" + "/stake_wallet";
-		tools::GraftWallet wallet(true, false);
+		tools::CryptoMyWallet wallet(true, false);
 		wallet.load(wallet_path, "");
-		pay_in.Account = epee::string_encoding::base64_encode( wallet.store_keys_graft("", false) );
+		pay_in.Account = epee::string_encoding::base64_encode( wallet.store_keys_cryptomy("", false) );
 		}
 
 
@@ -905,7 +905,7 @@ TEST_F(FSNServantTest, SignAndVerify)
     string wallet_root_path = epee::string_tools::get_current_module_folder() + "/../data/supernode/test_wallets";
     fsns->Set(wallet_root_path + "/stake_wallet", "", wallet_root_path + "/miner_wallet", "");
 
-    std::string message = "Hello, Graft";
+    std::string message = "Hello, CryptoMy";
     std::string address = "T6T2LeLmi6hf58g7MeTA8i4rdbVY8WngXBK3oWS7pjjq9qPbcze1gvV32x7GaHx8uWHQGNFBy1JCY1qBofv56Vwb26Xr998SE";
 
     std::string signature = fsns->SignByWalletPrivateKey(message, address);

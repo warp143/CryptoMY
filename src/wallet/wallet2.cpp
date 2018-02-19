@@ -80,8 +80,8 @@ using namespace cryptonote;
 // arbitrary, used to generate different hashes from the same input
 #define CHACHA8_KEY_TAIL 0x8c
 
-#define UNSIGNED_TX_PREFIX "Graft unsigned tx set\003"
-#define SIGNED_TX_PREFIX "Graft signed tx set\003"
+#define UNSIGNED_TX_PREFIX "CryptoMy unsigned tx set\003"
+#define SIGNED_TX_PREFIX "CryptoMy signed tx set\003"
 
 #define RECENT_OUTPUT_RATIO (0.5) // 50% of outputs are from the recent zone
 #define RECENT_OUTPUT_ZONE ((time_t)(1.8 * 86400)) // last 1.8 day makes up the recent zone (taken from monerolink.pdf, Miller et al)
@@ -3538,7 +3538,7 @@ uint64_t wallet2::get_dynamic_per_kb_fee_estimate()
 //----------------------------------------------------------------------------------------------------
 uint64_t wallet2::get_per_kb_fee()
 {
-  // graft: use dynamic fee only
+  // cryptomy: use dynamic fee only
   /*
   bool use_dyn_fee = use_fork_rules(HF_VERSION_DYNAMIC_FEE, -720 * 1);
   if (!use_dyn_fee) {
@@ -4895,7 +4895,7 @@ bool wallet2::use_fork_rules(uint8_t version, int64_t early_blocks)
   throw_on_rpc_response_error(result, "get_info");
   result = m_node_rpc_proxy.get_earliest_height(version, earliest_height);
   throw_on_rpc_response_error(result, "get_hard_fork_info");
-  // graft: check if we have integer overflow in 'earliest_height - early_blocks' because we started from v7
+  // cryptomy: check if we have integer overflow in 'earliest_height - early_blocks' because we started from v7
   bool close_enough = earliest_height >= static_cast<uint64_t>(std::abs(early_blocks)) ?
         (height >=  earliest_height - early_blocks) : true; // start using the rules that many blocks beforehand
   LOG_PRINT_L2("height: " << height << ", earliest_height: " << earliest_height);
@@ -5616,7 +5616,7 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
 //----------------------------------------------------------------------------------------------------
 bool wallet2::parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &amount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error)
 {
-  static const std::string URI_PREFIX = "graft:";
+  static const std::string URI_PREFIX = "cryptomy:";
   static const int URI_LEN = URI_PREFIX.length();
 
 
