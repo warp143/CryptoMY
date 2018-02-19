@@ -4,7 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # graftnoned expected to be copied to this directory
 
-$DIR/graftnoded --testnet --testnet-p2p-bind-port 28280 \
+$DIR/cryptomyd --testnet --testnet-p2p-bind-port 28280 \
     --rpc-bind-ip 0.0.0.0 --testnet-rpc-bind-port 28281 \
     --no-igd --hide-my-port  --log-level 1 \
     --testnet-data-dir $DIR/node_01 \

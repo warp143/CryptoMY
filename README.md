@@ -131,7 +131,7 @@ invokes cmake commands as needed.
 
 * Add `PATH="$PATH:$HOME/GraftNetwork/build/release/bin"` to `.profile`
 
-* Run Graft Network with `graftnoded --detach`
+* Run Graft Network with `cryptomyd --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -192,7 +192,7 @@ Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from ht
 
 * Add `PATH="$PATH:$HOME/GraftNetwork/build/release/bin"` to `.profile`
 
-* Run Graft Network with `graftnoded --detach`
+* Run Graft Network with `cryptomyd --detach`
 
 * You may wish to reduce the size of the swap file after the build has finished, and delete the boost directory from your home directory
 
@@ -278,15 +278,15 @@ By default, in either dynamically or statically linked builds, binaries target t
 * ```make release-static-win64``` builds binaries on 64-bit Windows portable across 64-bit Windows systems
 * ```make release-static-win32``` builds binaries on 64-bit or 32-bit Windows portable across 32-bit Windows systems
 
-## Running graftnoded
+## Running cryptomyd
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in
 foreground:
 
-    ./bin/graftnoded
+    ./bin/cryptomyd
 
-To list all available options, run `./bin/graftnoded --help`.  Options can be
+To list all available options, run `./bin/cryptomyd --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -294,17 +294,17 @@ of the argument without the leading dashes, for example `log-level=1`.
 
 To run in background:
 
-    ./bin/graftnoded --log-file graftnoded.log --detach
+    ./bin/cryptomyd --log-file cryptomyd.log --detach
 
 To run as a systemd service, copy
-[graftnoded.service](utils/systemd/graftnoded.service) to `/etc/systemd/system/` and
-[graftnoded.conf](utils/conf/graftnoded.conf) to `/etc/`. The [example
-service](utils/systemd/graftnoded.service) assumes that the user `graftnode` exists
+[cryptomyd.service](utils/systemd/cryptomyd.service) to `/etc/systemd/system/` and
+[cryptomyd.conf](utils/conf/cryptomyd.conf) to `/etc/`. The [example
+service](utils/systemd/cryptomyd.service) assumes that the user `graftnode` exists
 and its home is the data directory specified in the [example
-config](utils/conf/graftnoded.conf).
+config](utils/conf/cryptomyd.conf).
 
 If you're on Mac, you may need to add the `--max-concurrency 1` option to
-graft-wallet-cli, and possibly graftnoded, if you get crashes refreshing.
+cryptomy-wallet-cli, and possibly cryptomyd, if you get crashes refreshing.
 
 ## Internationalization
 
@@ -312,27 +312,27 @@ See [README.i18n.md](README.i18n.md).
 
 ## Using Tor
 
-While Graft Network isn't made to integrate with Tor, it can be used wrapped with torsocks, if you add --p2p-bind-ip 127.0.0.1 to the graftnoded command line. You also want to set DNS requests to go over TCP, so they'll be routed through Tor, by setting DNS_PUBLIC=tcp. You may also disable IGD (UPnP port forwarding negotiation), which is pointless with Tor. To allow local connections from the wallet, you might have to add TORSOCKS_ALLOW_INBOUND=1, some OSes need it and some don't. Example:
+While Graft Network isn't made to integrate with Tor, it can be used wrapped with torsocks, if you add --p2p-bind-ip 127.0.0.1 to the cryptomyd command line. You also want to set DNS requests to go over TCP, so they'll be routed through Tor, by setting DNS_PUBLIC=tcp. You may also disable IGD (UPnP port forwarding negotiation), which is pointless with Tor. To allow local connections from the wallet, you might have to add TORSOCKS_ALLOW_INBOUND=1, some OSes need it and some don't. Example:
 
-`DNS_PUBLIC=tcp torsocks graftnoded --p2p-bind-ip 127.0.0.1 --no-igd`
+`DNS_PUBLIC=tcp torsocks cryptomyd --p2p-bind-ip 127.0.0.1 --no-igd`
 
 or:
 
-`DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 torsocks graftnoded --p2p-bind-ip 127.0.0.1 --no-igd`
+`DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 torsocks cryptomyd --p2p-bind-ip 127.0.0.1 --no-igd`
 
 TAILS ships with a very restrictive set of firewall rules. Therefore, you need to add a rule to allow this connection too, in addition to telling torsocks to allow inbound connections. Full example:
 
 `sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT`
 
-`DNS_PUBLIC=tcp torsocks ./graftnoded --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain`
+`DNS_PUBLIC=tcp torsocks ./cryptomyd --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain`
 
-`./graft-wallet-cli`
+`./cryptomy-wallet-cli`
 
 ## Using readline
 
-While graftnoded and graft-wallet-cli do not use readline directly, most of the functionality can be obtained by running them via rlwrap. This allows command recall, edit capabilities, etc. It does not give autocompletion without an extra completion file, however. To use rlwrap, simply prepend `rlwrap` to the command line, eg:
+While cryptomyd and cryptomy-wallet-cli do not use readline directly, most of the functionality can be obtained by running them via rlwrap. This allows command recall, edit capabilities, etc. It does not give autocompletion without an extra completion file, however. To use rlwrap, simply prepend `rlwrap` to the command line, eg:
 
-`rlwrap bin/graft-wallet-cli --wallet-file /path/to/wallet`
+`rlwrap bin/cryptomy-wallet-cli --wallet-file /path/to/wallet`
 
 Note: rlwrap will save things like your seed and private keys, if you supply them on prompt. You may want to not use rlwrap when you use simplewallet to restore from seed, etc.
 
@@ -351,7 +351,7 @@ Run the build.
 Once it stalls, enter the following command:
 
 ```
-gdb /path/to/graftnoded `pidof graftnoded` 
+gdb /path/to/cryptomyd `pidof cryptomyd` 
 ```
 
 Type `thread apply all bt` within gdb in order to obtain the stack trace
@@ -362,27 +362,27 @@ Enter `ulimit -c unlimited` on the command line to enable unlimited filesizes fo
 
 Run the build.
 
-When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as graftnoded.
+When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as cryptomyd.
 
 You can now analyse this core dump with `gdb` as follows:
 
-`gdb /path/to/graftnoded /path/to/dumpfile`
+`gdb /path/to/cryptomyd /path/to/dumpfile`
 
 Print the stack trace with `bt`
 
 * To run Graft Network within gdb:
 
-Type `gdb /path/to/graftnoded`
+Type `gdb /path/to/cryptomyd`
 
 Pass command-line options with `--args` followed by the relevant arguments
 
-Type `run` to run graftnoded
+Type `run` to run cryptomyd
 
 ## Analysing Memory Corruption
 
 We use the tool `valgrind` for this.
 
-Run with `valgrind /path/to/graftnoded`. It will be slow.
+Run with `valgrind /path/to/cryptomyd`. It will be slow.
 
 ## LMDB
 

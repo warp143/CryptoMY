@@ -1,4 +1,4 @@
 #!/bin/bash
-killall graftnoded
+killall cryptomyd
 
 

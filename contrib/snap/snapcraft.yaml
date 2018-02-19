@@ -23,9 +23,9 @@ apps:
             - home
             - network
             - network-bind
-    graft-wallet-cli:
+    cryptomy-wallet-cli:
         command: |
-          graft-wallet-cli --log-file ${SNAP_USER_DATA}
+          cryptomy-wallet-cli --log-file ${SNAP_USER_DATA}
         plugs:
             - home
             - network

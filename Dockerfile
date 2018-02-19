@@ -30,7 +30,7 @@ VOLUME /root/.graft
 
 # Generate your wallet via accessing the container and run:
 # cd /wallet
-# graft-wallet-cli
+# cryptomy-wallet-cli
 VOLUME /wallet
 
 ENV LOG_LEVEL 0
@@ -42,4 +42,4 @@ ENV RPC_BIND_PORT 18081
 EXPOSE 18080
 EXPOSE 18081
 
-CMD graftnoded --log-level=$LOG_LEVEL --p2p-bind-ip=$P2P_BIND_IP --p2p-bind-port=$P2P_BIND_PORT --rpc-bind-ip=$RPC_BIND_IP --rpc-bind-port=$RPC_BIND_PORT
+CMD cryptomyd --log-level=$LOG_LEVEL --p2p-bind-ip=$P2P_BIND_IP --p2p-bind-port=$P2P_BIND_PORT --rpc-bind-ip=$RPC_BIND_IP --rpc-bind-port=$RPC_BIND_PORT

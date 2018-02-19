@@ -303,7 +303,7 @@ namespace cryptonote
       {
         MWARNING("Found old-style blockchain.bin in " << old_files.string());
         MWARNING("Monero now uses a new format. You can either remove blockchain.bin to start syncing");
-        MWARNING("the blockchain anew, or use graft-blockchain-export and graft-blockchain-import to");
+        MWARNING("the blockchain anew, or use cryptomy-blockchain-export and cryptomy-blockchain-import to");
         MWARNING("convert your existing blockchain.bin to the new format. See README.md for instructions.");
         return false;
       }

@@ -1,2 +1,2 @@
-./build/release/bin/graftnoded --testnet --detach
+./build/release/bin/cryptomyd --testnet --detach
 

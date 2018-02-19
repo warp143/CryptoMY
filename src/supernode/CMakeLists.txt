@@ -153,7 +153,7 @@ if (NOT BUILD_GUI_DEPS)
     add_dependencies(supernode_rpc_server version)
     set_property(TARGET supernode_rpc_server
         PROPERTY
-        OUTPUT_NAME "graft-supernode")
+        OUTPUT_NAME "cryptomy-supernode")
     install(TARGETS supernode_rpc_server DESTINATION bin)
 endif()
 

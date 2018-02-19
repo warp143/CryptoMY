@@ -59,5 +59,5 @@ add_dependencies(simplewallet
   version)
 set_property(TARGET simplewallet
   PROPERTY
-    OUTPUT_NAME "graft-wallet-cli")
+    OUTPUT_NAME "cryptomy-wallet-cli")
 install(TARGETS simplewallet DESTINATION bin)
