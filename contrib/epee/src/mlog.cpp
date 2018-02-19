@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The Graft Project
+// Copyright (c) 2018, The CryptoMY Project
 // Copyright (c) 2006-2013, Andrey N. Sabelnikov, www.sabelnikov.net
 // All rights reserved.
 //

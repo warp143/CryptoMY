@@ -1,6 +1,6 @@
 # Graft Network
 
-Copyright (c) 2017, The Graft Project
+Copyright (c) 2017, The CryptoMY Project
 
 ## Monero Fork (Monero version 0.11.1.0)
 

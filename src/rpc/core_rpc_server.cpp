@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The Graft Project
+// Copyright (c) 2018, The CryptoMY Project
 // Copyright (c) 2014-2017, The Monero Project
 // 
 // All rights reserved.

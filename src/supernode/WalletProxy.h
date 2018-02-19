@@ -1,5 +1,5 @@
 
-// Copyright (c) 2017, The Graft Project
+// Copyright (c) 2017, The CryptoMY Project
 //
 // All rights reserved.
 //
